@@ -67,7 +67,6 @@ public class GettheWeather {
 		NodeList nList = doc.getElementsByTagName("clouds");
 		NodeList nList1 = doc.getElementsByTagName("temperature");
 		
-
 		// loop through the content of the tag
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			// Save a node of the current list id

@@ -1,3 +1,4 @@
+<%@page import="controller.OWservlet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="model.weatherBean"%>
@@ -7,47 +8,66 @@
 <meta charset="UTF-8">
 <title>the weather</title>
 <style>
-			#regform{
-			text-align:justify;
-			padding: 15px 15px;
-			background-color:#003366;
-			height: 200px;
-			
-			border-radius:15px;
-			}
-			td{
+		div{
+		text-align: center;
+		color: tomato;
+		}	
+		img{
 			width:100px;
-			color:white;
-			}
-			
-			h1{
-			margin:25px;
-			text-align:center;
-			padding:10px;
-			background-color:orange;
-			color:#fff;
-			border:2px solid green;
-			border-radius:10px;
-			
+			height:100px;
+		}
+		a {
+			  background-color:orange;
+			  padding:5px;
+			  margin:5px;
+			  border-radius:10px;
 			}
 		</style>
 </head>
+<jsp:include page="./index.jsp"></jsp:include>
 <body>
-<h1>{ Welcome to the Weather Station }</h1>
-	
-	<form action="OWservlet" method="get">
-		<table id="regform" align="center">
-		<tr><td>City:</td><td><input type="text" name="city" /></td></tr>
-		<tr><td>Country:</td><td><input type="text" name="country" /></td></tr>
-		<tr><td colspan=5 align="center"><input type="submit" value="go" /></td></tr></table>
-	</form>
-
+<div>
+<div>
 	<%
 	weatherBean wBean = (weatherBean) request.getAttribute("wBean");
-	out.print("The tempareture of " + wBean.getCityStr() + " is now  " + wBean.getTemperatureStr()+" C");
-	out.print("<html><br></html>");
-	out.print("The weather " + wBean.getCityStr() + " is now a " + wBean.getCloudsStr());
+	out.print("<h3>"+"The tempareture of " + wBean.getCityStr() + " is now  " + wBean.getTemperatureStr()+" °C" +"</h3>");
+	out.print("<h3>"+"The weather " + wBean.getCityStr() + " is now a " + wBean.getCloudsStr()+"</h3>");
+		
+	if(wBean.getCloudsStr().contains("cloud")) {
+		out.print("<img src='./image/cloudy.png' alt='cloudy' />");
+	}
+	else if(wBean.getCloudsStr().contains("heavy")) {
+		out.print("<img src='./image/heavyrain.png' alt='heavyrain' />");
+	}
+	else if(wBean.getCloudsStr().contains("light")) {
+		out.print("<img src='./image/lightrain.png' alt='lightrain' />");
+	}
+	else if(wBean.getCloudsStr().contains("snow")) {
+		out.print("<img src='./image/snow.png' alt='snow' />");
+	}
+	else if(wBean.getCloudsStr().contains("sunny")) {
+		out.print("<img src='./image/sunny.png' alt='sunny' />");
+	}
+	else if(wBean.getCloudsStr().contains("thunder")) {
+		out.print("<img src='./image/thunder.png' alt='thunder' />");
+	}
 	%>
+	
+</div>
+		<%
 
+		weatherBean weatherBean = (weatherBean) request.getAttribute("wBean");
+		for(int i = 0; i < 4;i++) {
+			Cookie existing = OWservlet.GetCookie(request, "Cookie" + i);
+			String[] parts = existing.getValue().split("\\|");
+
+			out.append("<a href=" + parts[0] + ">" + parts[1] + "</a>");
+		}
+
+		out.append("<a href=" + request.getRequestURI() + "?" + request.getQueryString() + ">" +  weatherBean.getCityStr() + ":" + weatherBean.getCountryStr() + "</a>");
+
+		%>
+		
+</div>
 </body>
 </html>

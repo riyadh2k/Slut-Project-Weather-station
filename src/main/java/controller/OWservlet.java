@@ -69,20 +69,14 @@ public class OWservlet extends HttpServlet {
 
 	private void saveChoiceCookie(HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
-		// Searches for if a cookie called ckChoice exists or if a buttonResult has been
-		// clicked in order to create
-		// create a cookie. In both ifs checker is set to true
-		boolean checker = false;
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				if (cookies[i].getName().equals("ckChoice")) {
-					checker = true;
 					request.setAttribute("useCookie", cookies[i].getValue().equals("Accept"));
 				} else if (request.getParameter("buttonResult") != null) {
 					Cookie ckButtonResult = new Cookie("ckChoice", request.getParameter("buttonResult"));
 					ckButtonResult.setMaxAge(60 * 60 * 24 * 30);
 					response.addCookie(ckButtonResult);
-					checker = true;
 					request.setAttribute("useCookie", request.getParameter("buttonResult").equals("Accept"));
 				}
 			}

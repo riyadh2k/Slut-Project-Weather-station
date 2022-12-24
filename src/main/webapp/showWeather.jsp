@@ -50,8 +50,8 @@ script {
 				out.print("<img src='./image/lightrain.png' alt='lightrain' />");
 			} else if (wBean.getCloudsStr().contains("snow")) {
 				out.print("<img src='./image/snow.png' alt='snow' />");
-			} else if (wBean.getCloudsStr().contains("sunny")) {
-				out.print("<img src='./image/sunny.png' alt='sunny' />");
+			} else if (wBean.getCloudsStr().contains("clear")) {
+				out.print("<img src='./image/sunny.png' alt='clear' />");
 			} else if (wBean.getCloudsStr().contains("thunder")) {
 				out.print("<img src='./image/thunder.png' alt='thunder' />");
 			}

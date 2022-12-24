@@ -9,6 +9,7 @@ public class weatherBean {
 	private String cloudsStr;
 
 	private String temperatureStr;
+	private String timeStr;
 
 	public weatherBean(String cityStr, String countryStr) {
 
@@ -39,6 +40,14 @@ public class weatherBean {
 
 	public void setTemperatureStr(String temperatureStr) {
 		this.temperatureStr = temperatureStr;
+	}
+
+	public String getTimeStr() {
+		return timeStr;
+	}
+
+	public void setTimeStr(String timeStr) {
+		this.timeStr = timeStr;
 	}
 
 }
